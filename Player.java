@@ -10,9 +10,9 @@ public class Player {
 	
 	private String name;
 	
-	public Player(String n) {
+	public Player() {
 		balance=1500;
-		name = n;
+		
 		tiles=new ArrayList<Tile>();
 	}
 	
