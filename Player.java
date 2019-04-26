@@ -28,11 +28,5 @@ public class Player {
 		Random gen = new Random();
 		return (gen.nextInt(6)+1)*2;
 		
-	}
-	
-	
-	
-	
-	
-	
+	}	
 }
