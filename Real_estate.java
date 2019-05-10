@@ -2,11 +2,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Real_estate {
-	 
-	public void RealEstateValue()
-	{
-		//String[] Property = new String[] {"Moms Basement","Tipi", "Tent", "Dog House", "Tiny Shed", "Yurt", "Shack", "Small Garage", "Tree House", "House Boat", "Log Cabin", "Dormitory", "Apartment", "Condominium", "Two Family Shared House", "Cottage", "Single Family House", "Manor House", "McMansion", "Villa", "Mansion", "Castle"};
-		List<String> Property = new ArrayList<String>();
+
+	List<String> Property = new ArrayList<String>();
+	List<Integer> Value = new ArrayList<Integer>();
+	List<String> Color = new ArrayList<String>();
+
+	public void RealEstateValue() {
+		// String[] Property = new String[] {"Moms Basement","Tipi", "Tent", "Dog
+		// House", "Tiny Shed", "Yurt", "Shack", "Small Garage", "Tree House", "House
+		// Boat", "Log Cabin", "Dormitory", "Apartment", "Condominium", "Two Family
+		// Shared House", "Cottage", "Single Family House", "Manor House", "McMansion",
+		// "Villa", "Mansion", "Castle"};
+
 		Property.add("Mom's Basement");
 		Property.add("Tipi");
 		Property.add("Tent");
@@ -29,9 +36,7 @@ public class Real_estate {
 		Property.add("Villa");
 		Property.add("Mansion");
 		Property.add("Castle");
-		
-		
-		List<Integer> Value = new ArrayList<Integer>();
+
 		Value.add(60);
 		Value.add(70);
 		Value.add(100);
@@ -54,8 +59,7 @@ public class Real_estate {
 		Value.add(320);
 		Value.add(350);
 		Value.add(400);
-		
-		List<String> Color = new ArrayList<String>();
+
 		Color.add("Brown");
 		Color.add("Brown");
 		Color.add("Light Blue");
@@ -78,8 +82,7 @@ public class Real_estate {
 		Color.add("Green");
 		Color.add("Dark Blue");
 		Color.add("Dark Blue");
-		
+
 	}
-	
-	
+
 }

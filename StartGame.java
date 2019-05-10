@@ -25,5 +25,9 @@ public class StartGame {
 			Player player3 = new Player();
 			Player player4 = new Player();
 		}
+		
+		
+		
+		
 	}
 }
