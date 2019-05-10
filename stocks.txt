@@ -1,0 +1,4 @@
+Amazon, 350
+General Motor, 230
+Mcdonalds, 200
+Microsoft, 250
