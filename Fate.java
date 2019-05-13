@@ -22,4 +22,5 @@ public class Fate {
 		deck.add("You were caught vandalizing town property, pay $30 to repair the damages, and go unemployed\n" + "");
 
 	}
+
 }

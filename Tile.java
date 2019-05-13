@@ -1,11 +1,11 @@
 
 public abstract class Tile {
 
-	public final String name;
+	public String name;
 
-	public final int price;
+	public int price;
 
-	public final String color;
+	public String color;
 
 	public final int index;
 
@@ -15,6 +15,18 @@ public abstract class Tile {
 		color = c;
 		index = i;
 
+	}
+
+	private void setName(String n) {
+		name = n;
+	}
+
+	private void setPrice(int p) {
+		price = p;
+	}
+
+	private void setColor(String c) {
+		color = c;
 	}
 
 }

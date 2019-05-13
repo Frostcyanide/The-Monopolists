@@ -84,5 +84,8 @@ public class Real_estate {
 		Color.add("Dark Blue");
 
 	}
+	
+	
+	
 
 }
