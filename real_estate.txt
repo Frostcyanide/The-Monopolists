@@ -15,11 +15,11 @@ Condominium
 Two Family House
 Cottage
 Single Family House
-Manor House,  300
-McMansion, 300 
-Villa, 320
-Mansion, 350
-Castle, 400
+Manor House
+McMansion
+Villa
+Mansion
+Castle
 
 60
 70
