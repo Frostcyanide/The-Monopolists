@@ -1,5 +1,5 @@
 
-public abstract class Tile implements Comparable<Tile> {
+public  class Tile {
 
 	public String name;
 
@@ -29,8 +29,4 @@ public abstract class Tile implements Comparable<Tile> {
 		color = c;
 	}
 
-	public String toString() {
-		return this.name + "\n" + this.price + "\n" + this.color + "\n";
-
-	}
 }

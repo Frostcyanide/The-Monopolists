@@ -9,17 +9,13 @@ public class Stock extends Tile {
 	}
 	
 	
-	
-	
+
+
 	
 	
 	
 	
 	
 
-	@Override
-	public int compareTo(Tile o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 }
