@@ -1,0 +1,10 @@
+Advance to Payday, collect $200
+Advance to the nearest unowned property, you can buy it if you wish
+Move backwards 5 spots
+Move to the nearest property that an opponent owns, if no opponents own any properties, then you do not move
+Advance to the Castle, if it is unowned, you may purchase it.
+Taxes are due! Advance to the Income tax slot, you may receive your paycheck if you pass PAYDAY
+Your Dog House was damaged in a storm! Advance to Dog House, you may purchase it if it is unowned
+Move to the nearest Fate Location
+You have been caught speeding, pay a fine of $20
+Your car has been repossessed for failure to make the monthly payments, pay $40 to get it back
