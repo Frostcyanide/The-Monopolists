@@ -1,3 +1,4 @@
+import java.awt.FlowLayout;
 import java.util.Scanner;
 import javax.swing.*;
 
@@ -23,8 +24,14 @@ public class StartGame {
 		}
 
 		JFrame window = new JFrame();
-		ImageIcon icon = new ImageIcon("monopoly-board21.jpg");
+		ImageIcon icon = new ImageIcon("C:\\Users\\richa\\OneDrive\\Desktop\\board1.jpg");
 		JLabel label = new JLabel(icon);
+
+		window.setLayout(new FlowLayout());
+		window.setSize(1500, 1500);
+		window.add(label);
+		window.setVisible(true);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
 }
