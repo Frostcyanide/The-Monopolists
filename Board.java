@@ -38,24 +38,29 @@ public class Board {
 		Scanner reader7 = new Scanner(file7);
 
 		for (int i = 0; i < typeR.length; i++) {
-			board[i] = new Real_estate(reader1.nextLine(), reader4.nextInt(), reader5.nextLine(), i);
+			board[typeR[i]] = new Real_estate(reader1.nextLine(), reader4.nextInt(), reader5.nextLine(), typeR[i],
+					"bank");
 		}
 		for (int i = 0; i < typeS.length; i++) {
-			board[i] = new Stock(reader2.nextLine(), reader6.nextInt(), "black", i);
+			board[typeS[i]] = new Stock(reader2.nextLine(), reader6.nextInt(), "black", typeS[i], "bank");
 		}
 		for (int i = 0; i < typeB.length; i++) {
-			board[i] = new Bond(reader3.nextLine(), reader7.nextInt(), "white", i);
+			board[typeB[i]] = new Bond(reader3.nextLine(), reader7.nextInt(), "white", typeB[i], "bank");
 		}
 		for (int i = 0; i < typeC.length; i++) {
-			board[i] = new Chance("Chance", 0, "c", i);
+			board[typeC[i]] = new Chance("Chance", 0, "c", typeC[i], "bank");
 		}
 		for (int i = 0; i < typeF.length; i++) {
-			board[i] = new Fate("Fate", 0, "f", i);
+			board[typeF[i]] = new Fate("Fate", 0, "f", typeF[i], "bank");
 
 		}
 
-		board[4] = new Tile("Luxury tax", 150, "grey", 4);
-		board[38] = new Tile("Automobile tax", 250, "grey", 38);
+		board[4] = new Tile("Luxury tax", -150, "grey", 4, "bank");
+		board[38] = new Tile("Automobile tax", -250, "grey", 38, "bank");
+		board[0] = new Tile("Payday, collect $200", 200, "NC", 0, "bank");
+		board[10] = new Tile("Helping the unemployed", -100, "NC", 10, "bank");
+		board[20] = new Tile("Vacation", 0, "NC", 20, "bank");
+		board[30] = new Tile("Got fired!", 0, "NC", 30, "bank");
 
 	}
 

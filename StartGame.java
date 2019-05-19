@@ -1,33 +1,30 @@
 import java.util.Scanner;
+import javax.swing.*;
+
 public class StartGame {
-	public static void main(String []args)
-	{
-		 
+	public static void main(String[] args) {
+
 		int numberOfPlayers = 0;
 		System.out.println("How many players (2-4): ");
 		Scanner input = new Scanner(System.in);
 		numberOfPlayers = input.nextInt();
-		if(numberOfPlayers == 2)
-		{
+		if (numberOfPlayers == 2) {
 			Player player1 = new Player();
 			Player player2 = new Player();
-		}
-		else if(numberOfPlayers == 3)
-		{
+		} else if (numberOfPlayers == 3) {
 			Player player1 = new Player();
 			Player player2 = new Player();
 			Player player3 = new Player();
-		}
-		else
-		{
+		} else {
 			Player player1 = new Player();
 			Player player2 = new Player();
 			Player player3 = new Player();
 			Player player4 = new Player();
 		}
-		
-		
-		
-		
+
+		JFrame window = new JFrame();
+		ImageIcon icon = new ImageIcon("monopoly-board21.jpg");
+		JLabel label = new JLabel(icon);
+
 	}
 }
