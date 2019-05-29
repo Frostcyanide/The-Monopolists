@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Board {
 
-
 	private Tile[] board = new Tile[40];
 	private int[] typeR = { 1, 3, 6, 8, 9, 11, 13, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29, 31, 32, 34, 37, 39 };
 	private int[] typeS = { 5, 15, 25, 35 };
@@ -39,40 +38,34 @@ public class Board {
 		Scanner reader7 = new Scanner(file7);
 
 		for (int i = 0; i < typeR.length; i++) {
-			board[typeR[i]] = new Real_estate(reader1.nextLine(), reader4.nextInt(), reader5.nextLine(), typeR[i],
-					null);
+			board[typeR[i]] = new Real_estate(reader1.nextLine(), reader4.nextInt(), reader5.nextLine(), typeR[i], null,
+					"RE");
 		}
 		for (int i = 0; i < typeS.length; i++) {
-			board[typeS[i]] = new Stock(reader2.nextLine(), reader6.nextInt(), "black", typeS[i], null);
+			board[typeS[i]] = new Stock(reader2.nextLine(), reader6.nextInt(), "black", typeS[i], null, "S");
 		}
 		for (int i = 0; i < typeB.length; i++) {
-			board[typeB[i]] = new Bond(reader3.nextLine(), reader7.nextInt(), "white", typeB[i], null);
+			board[typeB[i]] = new Bond(reader3.nextLine(), reader7.nextInt(), "white", typeB[i], null, "B");
 		}
 		for (int i = 0; i < typeC.length; i++) {
-			board[typeC[i]] = new Chance("Chance", 0, "chance", typeC[i], null);
+			board[typeC[i]] = new Chance("Chance", 0, "chance", typeC[i], null, "C");
 		}
 		for (int i = 0; i < typeF.length; i++) {
-			board[typeF[i]] = new Fate("Fate", 0, "fate", typeF[i], null);
+			board[typeF[i]] = new Fate("Fate", 0, "fate", typeF[i], null, "F");
 
 		}
 
-		board[4] = new Tile("Luxury tax", -150, "grey", 4, null);
-		board[38] = new Tile("Automobile tax", -250, "grey", 38, null);
-		board[0] = new Tile("Payday, collect $200", 200, "NC", 0, null);
-		board[10] = new Tile("Helping the unemployed", -100, "NC", 10, null);
-		board[20] = new Tile("Vacation", 0, "NC", 20, null);
-		board[30] = new Tile("Got fired!", 0, "NC", 30, null);
+		board[4] = new Tile("Luxury tax", -150, "grey", 4, null, "T");
+		board[38] = new Tile("Automobile tax", -250, "grey", 38, null, "T");
+		board[0] = new Tile("Payday, collect $200", 200, "NC", 0, null, "T");
+		board[10] = new Tile("Helping the unemployed", -100, "NC", 10, null, "T");
+		board[20] = new Tile("Vacation", 0, "NC", 20, null, "T");
+		board[30] = new Tile("Got fired!", 0, "NC", 30, null, "T");
 
 	}
-	
-	
-	
+
 	public Tile atIndex(int index) {
 		return board[index];
 	}
-	
-	public 
-	
-	
 
 }

@@ -11,8 +11,9 @@ public class Chance extends Tile {
 
 	private Random gen = new Random();
 
-	public Chance(String name, int price, String color, int index, Player owner) throws FileNotFoundException {
-		super(name, price, color, index, owner);
+	public Chance(String name, int price, String color, int index, Player owner, String type)
+			throws FileNotFoundException {
+		super(name, price, color, index, owner, type);
 		File file1 = new File("Chance.txt");
 		Scanner reader1 = new Scanner(file1);
 
@@ -24,11 +25,9 @@ public class Chance extends Tile {
 	public String drawChance() {
 
 		int r = gen.nextInt(10) + 1;
-		String[] str=deck.get(r).split(",");
-		
+		String[] str = deck.get(r).split(",");
+
 		return str[1];
-		
-		
 
 	}
 }

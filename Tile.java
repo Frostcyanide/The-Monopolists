@@ -1,21 +1,24 @@
 
 public class Tile {
 
-	protected String name;
+	private String name;
 
-	protected int price;
+	private int price;
 
-	protected String color;
+	private String color;
 
-	protected final int index;
+	public final int index;
 
-	protected Player owner;
+	private Player owner;
 
-	public Tile(String n, int p, String c, int i, Player o) {
+	private String type;
+
+	public Tile(String n, int p, String c, int i, Player o, String t) {
 		name = n;
 		price = p;
 		color = c;
 		index = i;
+		type = t;
 
 	}
 
@@ -26,8 +29,25 @@ public class Tile {
 	public void changeOwner(Player p) {
 		this.owner = p;
 	}
+
 	public Player getOwner() {
 		return this.owner;
+	}
+
+	public int getPrice() {
+		return this.price;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 	@Override

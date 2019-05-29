@@ -6,8 +6,8 @@ public class Bond extends Tile {
 	private boolean paid = false;
 	private int remainT;
 
-	public Bond(String name, int price, String color, int index, Player owner) {
-		super(name, price, color, index, owner);
+	public Bond(String name, int price, String color, int index, Player owner, String type) {
+		super(name, price, color, index, owner, type);
 		remainT = 3;
 
 	}
@@ -18,7 +18,7 @@ public class Bond extends Tile {
 			if (paid == false) {
 				paid = true;
 				remainT = -1;
-				return price * 2;
+				return this.getPrice() * 2;
 			}
 		}
 		return 0;

@@ -1,9 +1,10 @@
 import java.awt.FlowLayout;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javax.swing.*;
 
 public class StartGame {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 
 		Board arena = new Board();
 		int numberOfPlayers = 0;
@@ -43,9 +44,9 @@ public class StartGame {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Player[] order = { player1, player2, player3, player4 };
-		Tile current;
-		int playerChoice;
-		while (numberOfPlayers > 1) {
+		Tile current; // represents the current tile the player is on
+		int playerChoice, numberOfRounds = 20;// maximum number of rounds before game ends
+		while (numberOfRounds >= 0) {
 
 			for (Player p : order) {
 				System.out.println("Now is " + p.getName() + "'s turn");
@@ -53,20 +54,49 @@ public class StartGame {
 				System.out.println("Now rolling dices:");
 				p.move();
 				current = arena.atIndex(p.getPosition());
-				System.out.println(current);
+				System.out.println(current); // displaying the current tile information
 
-				if (arena.atIndex(p.getPosition()) == null) {
-					System.out.println("Buy or Auction?(1/2)");
-					playerChoice = input.nextInt();
-					
-					switch(playerChoice) {
-					case 1:
-						current.
+				switch (current.getType()) {
+				case "RE":// if the tile is a real_estate
+					if (current.getOwner() == null) {
+						System.out.println("Buy or Auction?(1/2)");
+						playerChoice = input.nextInt();
+
+						switch (playerChoice) {
+						case 1:
+							// buy
+							current.changeOwner(p);
+							p.setBalance(p.getBalance() - current.getPrice());
+							break;
+						case 2:
+							// Auction, unfinished
+							break;
+						}
+
 					}
-				}
 
-				if (arena.atIndex(p.getPosition()).getOwner() != p) {
-					// lose this amount of money etc
+					else {
+						// pay the rent
+					}
+					break;
+				case "S":
+					// stock card
+
+					break;
+				case "B":
+					// bond card
+					break;
+				case "C":
+					// chance card
+					break;
+				case "F":
+					// fate card
+					break;
+				case "T":
+					// special tile
+					if (current.index == 4)
+						p.setBalance(p.getBalance() + current.getPrice());
+					break;
 				}
 
 			}

@@ -9,10 +9,10 @@ public class Fate extends Tile {
 	private List<String> deck = new ArrayList<String>();
 	private Random gen = new Random();
 
-	public Fate(String name, int price, String color, int index, Player owner) throws FileNotFoundException {
+	public Fate(String name, int price, String color, int index, Player owner, String type)
+			throws FileNotFoundException {
 
-		super(name, price, color, index, owner);
-
+		super(name, price, color, index, owner, type);
 		File file1 = new File("Chance.txt");
 		Scanner reader1 = new Scanner(file1);
 
@@ -20,12 +20,11 @@ public class Fate extends Tile {
 			deck.add(reader1.nextLine());
 		}
 	}
-	
-	
+
 	public String drawFate() {
 		int r = gen.nextInt(10) + 1;
-		String[] str=deck.get(r).split(",");
-		
+		String[] str = deck.get(r).split(",");
+
 		return str[1];
 	}
 
