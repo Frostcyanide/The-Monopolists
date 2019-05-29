@@ -1,15 +1,17 @@
 
-public  class Tile {
+public class Tile {
 
-	public String name;
+	protected String name;
 
-	public int price;
+	protected int price;
 
-	public String color;
+	protected String color;
 
-	public final int index;
+	protected final int index;
 
-	public Tile(String n, int p, String c, int i) {
+	protected Player owner;
+
+	public Tile(String n, int p, String c, int i, Player o) {
 		name = n;
 		price = p;
 		color = c;
@@ -17,16 +19,20 @@ public  class Tile {
 
 	}
 
-	private void setName(String n) {
-		name = n;
+	public void display() {
+		this.toString();
 	}
 
-	private void setPrice(int p) {
-		price = p;
+	public void changeOwner(Player p) {
+		this.owner = p;
+	}
+	public Player getOwner() {
+		return this.owner;
 	}
 
-	private void setColor(String c) {
-		color = c;
+	@Override
+	public String toString() {
+		return this.name + "\n" + this.price + "\n" + this.color + "\n" + this.owner;
 	}
 
 }

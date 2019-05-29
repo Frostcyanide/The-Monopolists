@@ -12,10 +12,13 @@ public class Player {
 
 	private boolean employed;
 
+	private int position;
+
 	public Player() {
 		balance = 1500;
 		tiles = new ArrayList<Tile>();
 		employed = true;
+		position =0;
 	}
 
 	public String getName() {
@@ -34,21 +37,31 @@ public class Player {
 		this.balance = b;
 	}
 
-	private int roll() {
+	public int roll() {
 		Random gen = new Random();
-		return (gen.nextInt(6) + 1) * 2;
+		return (gen.nextInt(6) + 1) + (gen.nextInt(6) + 1);
 
 	}
+	
+	public void move() {
+		int steps = roll();
+		System.out.println(steps);
+		position +=steps;
+	}
+	
+	public int getPosition() {
+		return position;
+	}
 
-	private void getPay() {
+	public void getPay() {
 		this.setBalance(this.getBalance() + 200);
 	}
 
-	private void buyTile(Tile t) {
+	public void buyTile(Tile t) {
 		tiles.add(t);
 	}
 
-	private void sellTile(Tile t) {
+	public void sellTile(Tile t) {
 		for (int i = 0; i < tiles.size(); i++) {
 			if (t.equals(tiles.get(i)))
 				tiles.remove(i);
@@ -56,11 +69,11 @@ public class Player {
 		}
 	}
 
-	private void loseJob() {
+	public void loseJob() {
 		employed = false;
 	}
 
-	private void getJob() {
+	public void getJob() {
 		employed = true;
 	}
 }

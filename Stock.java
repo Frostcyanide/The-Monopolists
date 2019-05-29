@@ -3,8 +3,8 @@ import java.util.List;
 
 public class Stock extends Tile {
 
-	public Stock(String name, int price, String color, int index) {
-		super(name, price, color, index);
+	public Stock(String name, int price, String color, int index, Player owner) {
+		super(name, price, color, index, owner);
 
 	}
 	

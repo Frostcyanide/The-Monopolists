@@ -11,8 +11,8 @@ public class Chance extends Tile {
 
 	private Random gen = new Random();
 
-	public Chance(String name, int price, String color, int index) throws FileNotFoundException {
-		super(name, price, color, index);
+	public Chance(String name, int price, String color, int index, Player owner) throws FileNotFoundException {
+		super(name, price, color, index, owner);
 		File file1 = new File("Chance.txt");
 		Scanner reader1 = new Scanner(file1);
 

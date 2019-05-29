@@ -6,8 +6,8 @@ public class Bond extends Tile {
 	private boolean paid = false;
 	private int remainT;
 
-	public Bond(String name, int price, String color, int index) {
-		super(name, price, color, index);
+	public Bond(String name, int price, String color, int index, Player owner) {
+		super(name, price, color, index, owner);
 		remainT = 3;
 
 	}
@@ -27,12 +27,6 @@ public class Bond extends Tile {
 
 	public void remainT() {
 		remainT--;
-	}
-
-	@Override
-	public int compareTo(Tile o) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

@@ -9,9 +9,9 @@ public class Fate extends Tile {
 	private List<String> deck = new ArrayList<String>();
 	private Random gen = new Random();
 
-	public Fate(String name, int price, String color, int index) throws FileNotFoundException {
+	public Fate(String name, int price, String color, int index, Player owner) throws FileNotFoundException {
 
-		super(name, price, color, index);
+		super(name, price, color, index, owner);
 
 		File file1 = new File("Chance.txt");
 		Scanner reader1 = new Scanner(file1);
