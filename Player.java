@@ -18,7 +18,7 @@ public class Player {
 		balance = 1500;
 		tiles = new ArrayList<Tile>();
 		employed = true;
-		position =0;
+		position = 0;
 	}
 
 	public String getName() {
@@ -42,13 +42,13 @@ public class Player {
 		return (gen.nextInt(6) + 1) + (gen.nextInt(6) + 1);
 
 	}
-	
+
 	public void move() {
 		int steps = roll();
 		System.out.println(steps);
-		position +=steps;
+		position += steps;
 	}
-	
+
 	public int getPosition() {
 		return position;
 	}
@@ -59,6 +59,7 @@ public class Player {
 
 	public void buyTile(Tile t) {
 		tiles.add(t);
+		balance -= t.getPrice();
 	}
 
 	public void sellTile(Tile t) {
@@ -67,6 +68,32 @@ public class Player {
 				tiles.remove(i);
 
 		}
+		balance += t.getPrice() * 0.75;
+	}
+
+	public void payRent(Real_estate r) {
+		balance -= r.getRent();
+	}
+
+	public void receiveRent(Real_estate r) {
+		balance += r.getRent();
+	}
+
+	public void payTax(Tile t) {
+
+	}
+
+	public void returnInvestment(Stock s) {
+		Random gen = new Random();
+		if (gen.nextInt(2) == 1)
+			balance += gen.nextInt(4) * s.getPrice();
+		else
+			balance -= gen.nextInt(4) * s.getPrice();
+
+	}
+
+	public void returnBond(Bond b) {
+		balance += b.getPrice() * 2;
 	}
 
 	public void loseJob() {
@@ -76,4 +103,17 @@ public class Player {
 	public void getJob() {
 		employed = true;
 	}
+
+	public String drawChance(Chance c) {
+		Random gen = new Random();
+		int r = gen.nextInt(10) + 1;
+
+	}
+
+	public String drawFate(Fate f) {
+		Random gen = new Random();
+		int r = gen.nextInt(10) + 1;
+
+	}
+
 }

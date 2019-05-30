@@ -21,11 +21,6 @@ public class Fate extends Tile {
 		}
 	}
 
-	public String drawFate() {
-		int r = gen.nextInt(10) + 1;
-		String[] str = deck.get(r).split(",");
-
-		return str[1];
-	}
+	
 
 }

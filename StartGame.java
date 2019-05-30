@@ -49,12 +49,15 @@ public class StartGame {
 		while (numberOfRounds >= 0) {
 
 			for (Player p : order) {
-				System.out.println("Now is " + p.getName() + "'s turn");
+				System.out.println("It is now  " + p.getName() + "'s turn");
 
 				System.out.println("Now rolling dices:");
 				p.move();
 				current = arena.atIndex(p.getPosition());
 				System.out.println(current); // displaying the current tile information
+				System.out.println("You are " + p);
+				System.out.println("Your balance: " + p.getBalance());
+				System.out.println();
 
 				switch (current.getType()) {
 				case "RE":// if the tile is a real_estate
@@ -65,8 +68,7 @@ public class StartGame {
 						switch (playerChoice) {
 						case 1:
 							// buy
-							current.changeOwner(p);
-							p.setBalance(p.getBalance() - current.getPrice());
+							p.buyTile(current);
 							break;
 						case 2:
 							// Auction, unfinished
@@ -77,25 +79,62 @@ public class StartGame {
 
 					else {
 						// pay the rent
+						p.payRent((Real_estate) current);
+						current.getOwner().receiveRent((Real_estate) current);
 					}
 					break;
 				case "S":
 					// stock card
+					if (current.getOwner() == null) {
+						System.out.println("Buy or Auction?(1/2)");
+						playerChoice = input.nextInt();
 
+						switch (playerChoice) {
+						case 1:
+							// buy
+							p.buyTile(current);
+							break;
+						case 2:
+							// Auction, unfinished
+							break;
+						}
+
+					} else if (current.getOwner() == p) {
+						p.returnInvestment((Stock) current);
+					}
 					break;
+
 				case "B":
 					// bond card
+					if (current.getOwner() == null) {
+						System.out.println("Buy or Auction?(1/2)");
+						playerChoice = input.nextInt();
+
+						switch (playerChoice) {
+						case 1:
+							// buy
+							p.buyTile(current);
+							break;
+						case 2:
+							// Auction, unfinished
+							break;
+						}
+
+					} else if (current.getOwner() == p) {
+						p.returnBond((Bond) current);
+					}
 					break;
+
 				case "C":
 					// chance card
+
 					break;
 				case "F":
 					// fate card
 					break;
 				case "T":
 					// special tile
-					if (current.index == 4)
-						p.setBalance(p.getBalance() + current.getPrice());
+					p.setBalance(p.getBalance() + current.getPrice());
 					break;
 				}
 
