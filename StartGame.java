@@ -18,6 +18,9 @@ public class StartGame {
 		Player player3 = null;
 		Player player4 = null;
 
+		/*
+		 * When there are only two players
+		 */
 		if (numberOfPlayers == 2) {
 			player1 = new Player();
 			player2 = new Player();
@@ -32,7 +35,7 @@ public class StartGame {
 			player3 = new Player();
 			player4 = new Player();
 		}
-
+		// Intialize a window
 		JFrame window = new JFrame();
 		ImageIcon icon = new ImageIcon("Monopoly-board.png");
 		JLabel label = new JLabel(icon);
@@ -127,10 +130,11 @@ public class StartGame {
 
 				case "C":
 					// chance card
-
+					p.drawChance((Chance) current);
 					break;
 				case "F":
 					// fate card
+					p.drawFate((Fate) current);
 					break;
 				case "T":
 					// special tile

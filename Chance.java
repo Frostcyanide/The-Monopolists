@@ -13,7 +13,7 @@ public class Chance extends Tile {
 
 	public Chance(String name, int price, String color, int index, Player owner, String type)
 			throws FileNotFoundException {
-		
+
 		super(name, price, color, index, owner, type);
 		File file1 = new File("Chance.txt");
 		Scanner reader1 = new Scanner(file1);
@@ -21,6 +21,13 @@ public class Chance extends Tile {
 		while (reader1.hasNextLine()) {
 			deck.add(reader1.nextLine());
 		}
+	}
+
+	public int generateChance() {
+		Random gen = new Random();
+		int r = gen.nextInt(10);
+		System.out.println(deck.get(r));
+		return r;
 	}
 
 }

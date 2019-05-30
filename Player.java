@@ -53,6 +53,10 @@ public class Player {
 		return position;
 	}
 
+	public void checkTile(Tile t) {
+
+	}
+
 	public void getPay() {
 		this.setBalance(this.getBalance() + 200);
 	}
@@ -104,15 +108,37 @@ public class Player {
 		employed = true;
 	}
 
-	public String drawChance(Chance c) {
-		Random gen = new Random();
-		int r = gen.nextInt(10) + 1;
+	public void drawChance(Chance c) {
+
+		int r = c.generateChance();
+
+	}
+
+	public void chooseChance(int r) {
+		switch (r) {
+		case 0:
+			balance += 200;
+			position = 0;
+			break;
+		case 1:
+			// unfinished
+			break;
+		case 2:
+			position -= 5;
+			break;
+		case 3:
+			balance -= 50;
+			break;
+		case 4:
+			position = 39;
+
+		}
 
 	}
 
 	public String drawFate(Fate f) {
-		Random gen = new Random();
-		int r = gen.nextInt(10) + 1;
+
+		return f.generateFate();
 
 	}
 
