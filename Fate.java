@@ -21,11 +21,11 @@ public class Fate extends Tile {
 		}
 	}
 
-	public String generateFate() {
+	public void generateFate() {
 		Random gen = new Random();
-		String c = deck.get(gen.nextInt(10));
+		int r = gen.nextInt(10);
+		String c = deck.get(r);
 		System.out.println(c);
-		return c;
 	}
 
 }

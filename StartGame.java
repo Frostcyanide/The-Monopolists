@@ -130,15 +130,17 @@ public class StartGame {
 
 				case "C":
 					// chance card
-					p.drawChance((Chance) current);
+					((Chance) current).generateChance(p, arena);
+
 					break;
 				case "F":
 					// fate card
-					p.drawFate((Fate) current);
+					((Fate) current).generateFate(p, arena);
 					break;
 				case "T":
 					// special tile
 					p.setBalance(p.getBalance() + current.getPrice());
+					
 					break;
 				}
 

@@ -49,12 +49,12 @@ public class Player {
 		position += steps;
 	}
 
-	public int getPosition() {
-		return position;
+	public void moveTo(int index) {
+		position = index;
 	}
 
-	public void checkTile(Tile t) {
-
+	public int getPosition() {
+		return position;
 	}
 
 	public void getPay() {
@@ -106,40 +106,6 @@ public class Player {
 
 	public void getJob() {
 		employed = true;
-	}
-
-	public void drawChance(Chance c) {
-
-		int r = c.generateChance();
-
-	}
-
-	public void chooseChance(int r) {
-		switch (r) {
-		case 0:
-			balance += 200;
-			position = 0;
-			break;
-		case 1:
-			// unfinished
-			break;
-		case 2:
-			position -= 5;
-			break;
-		case 3:
-			balance -= 50;
-			break;
-		case 4:
-			position = 39;
-
-		}
-
-	}
-
-	public String drawFate(Fate f) {
-
-		return f.generateFate();
-
 	}
 
 }
