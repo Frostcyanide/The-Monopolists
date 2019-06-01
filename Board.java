@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Board {
@@ -68,4 +69,34 @@ public class Board {
 		return board[index];
 	}
 
+	public void hostAuction(ArrayList<Player> players, Tile t) {
+		Scanner input = new Scanner(System.in);
+		int highestPrice = 0;
+		Player highestPlayer = null;
+
+		while (players.size() != 1) {
+
+			for (Player p : players) {
+				System.out.println("The current highest price is $" + highestPrice + " by " + "highestPlayer\n"
+						+ p.getName() + ", would you like to bid or fold?(1/2)");
+				if (input.nextInt() == 2)
+					players.remove(p);
+				else {
+					System.out.println("How much would you bid?");
+					int price = input.nextInt();
+					if (price > highestPrice) {
+						highestPrice = price;
+						highestPlayer = p;
+					}
+				}
+			}
+
+			System.out.println(players.get(0).getName() + "won the auction at a price of " + highestPrice
+					+ " and got the tile\n" + t.toString());
+
+			players.get(0).buyTile(t);
+			players.get(0).setBalance(players.get(0).getBalance() + t.getPrice() - highestPrice);
+
+		}
+	}
 }

@@ -52,7 +52,9 @@ public class Tile {
 
 	@Override
 	public String toString() {
-		return this.name + "\n" + this.price + "\n" + this.color + "\n" + this.owner;
+
+		return "Tile name:" + this.name + "\n" + "Tile price:" + this.price + "\n" + "This tile is own by:" + this.owner
+				+ "(null means owned by bank so far)";
 	}
 
 }

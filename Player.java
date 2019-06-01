@@ -13,16 +13,20 @@ public class Player {
 	private boolean employed;
 
 	private int position;
+	
+	private int remainRoundUnemployed;
 
-	public Player() {
+	public Player(String n) {
 		balance = 1500;
 		tiles = new ArrayList<Tile>();
 		employed = true;
 		position = 0;
+		name = n;
+		remainRoundUnemployed=0;
 	}
 
 	public String getName() {
-		return this.name;
+		return "Player" + this.name;
 	}
 
 	public void setName(String n) {
@@ -43,14 +47,17 @@ public class Player {
 
 	}
 
-	public void move() {
-		int steps = roll();
-		System.out.println(steps);
-		position += steps;
-	}
 
 	public void moveTo(int index) {
 		position = index;
+	}
+
+	public void checkBeforeMove(int step) {
+		System.out.println(step);
+		if (this.getPosition() + step > 39)
+			this.moveTo(getPosition() + step - 40);
+		else
+			position += step;
 	}
 
 	public int getPosition() {
@@ -83,10 +90,6 @@ public class Player {
 		balance += r.getRent();
 	}
 
-	public void payTax(Tile t) {
-
-	}
-
 	public void returnInvestment(Stock s) {
 		Random gen = new Random();
 		if (gen.nextInt(2) == 1)
@@ -99,13 +102,39 @@ public class Player {
 	public void returnBond(Bond b) {
 		balance += b.getPrice() * 2;
 	}
+	
+	
+	
+	public boolean haveJob() {
+		return employed;
+	}
 
 	public void loseJob() {
 		employed = false;
+		remainRoundUnemployed=3;
+		position=9;
+	}
+	
+	public void findJob() {
+		int r = roll();
+		if (r==3||r==6||r==9||r==12) {
+			employed=true;
+			remainRoundUnemployed=0;
+			checkBeforeMove(r);
+			System.out.println("You received $"+r*50+"from your new boss to help you begin a new life! ");
+			balance+=r*50;
+		}
+		else {
+			remainRoundUnemployed--;
+			System.out.println("You have "+remainRoundUnemployed+" rounds to find a new job");
+			
+			if (remainRoundUnemployed==0) {
+				employed=true;
+				System.out.println("You got a new job!");
+			}
+		}
 	}
 
-	public void getJob() {
-		employed = true;
-	}
+
 
 }
