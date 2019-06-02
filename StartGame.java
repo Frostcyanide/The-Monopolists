@@ -61,6 +61,8 @@ public class StartGame {
 					System.out.println("Your balance: " + p.getBalance());
 					System.out.println();
 
+					menu(p, arena, players);
+
 				} else {
 					System.out.println("It is now Player " + p.getName() + "'s turn");
 					p.findJob();
@@ -79,7 +81,10 @@ public class StartGame {
 						System.out.println(arena.atIndex(p.getPosition())); // displaying the current tile information
 						System.out.println("Your balance: " + p.getBalance());
 						System.out.println();
+						menu(p, arena, players);
+
 					}
+
 				}
 
 			}
@@ -181,45 +186,61 @@ public class StartGame {
 	 */
 	public static void menu(Player p, Board arena, ArrayList<Player> players) {
 		Scanner input = new Scanner(System.in);
-		System.out.println("1. Buy this tile" + "\n2. Sell your tiles back to the bank"
-				+ "\n3. Trade with other players" + "\n4. Get a mortgage" + "\n5. Check your properties"
-				+ "\n6.Check other players' properties" + "\n7. Build more rooms at your properties");
-		int playerChoice = input.nextInt();
+		int playerChoice = 0;
 
-		switch (playerChoice) {
-		case 1:
-			if (arena.atIndex(p.getPosition()).getOwner() != null)
-				System.out.println("This tile is already purchased by" + arena.atIndex(p.getPosition()).getOwner());
-			else {
-				p.buyTile(arena.atIndex(p.getPosition()));
-				System.out.println("Purchase complete!");
+		while (playerChoice != 8) {
+			System.out.println(
+					"1. Buy this tile" + "\n2. Sell your tiles back to the bank" + "\n3. Trade with other players"
+							+ "\n4. Mortgage" + "\n5. Check your properties" + "\n6.Check other players' properties"
+							+ "\n7. Build more rooms at your properties" + "\n8. Next player");
+			playerChoice = input.nextInt();
+			switch (playerChoice) {
+			case 1:
+				if (arena.atIndex(p.getPosition()).getOwner() != null)
+					System.out.println("This tile is already purchased by" + arena.atIndex(p.getPosition()).getOwner());
+				else {
+					p.buyTile(arena.atIndex(p.getPosition()));
+					System.out.println("Purchase complete!");
+				}
+				break;
+			case 2:
+				p.displayProperty();
+				System.out.println(
+						"Pick a number to sell back to the bank, you only receive 60% of the amount of money you paid");
+				int choice = input.nextInt();
+				p.sellTile(p.returnProperty(choice));
+				System.out.println("Action complete!");
+				System.out.println("New balance: " + p.getBalance());
+				break;
+			case 3:
+				// trade with others, unfinished
+				break;
+			case 4:
+
+				System.out.println("Get mortgage or redeem properties?(1/2)");
+				int mchoice = input.nextInt();
+				if (mchoice == 1)
+					p.getMortgage(arena);
+				else
+					p.redeemProperty(arena);
+
+				break;
+			case 5:
+				p.displayProperty();
+				break;
+			case 6:
+				for (Player pl : players) {
+					pl.displayProperty();
+				}
+				break;
+			case 7:
+				p.buildRoom(arena);
+				break;
+			case 8:
+
+				break;
+
 			}
-			break;
-		case 2:
-			p.displayProperty();
-			System.out.println("Pick a number to sell back to the bank, you only receive 60% of the amount of money you paid");
-			int choice =input.nextInt();
-			p.sellTile(p.returnProperty(choice));
-			System.out.println("Action complete!");
-			System.out.println("New balance: "+p.getBalance());
-			break;
-		case 3:
-			//trade with others, unfinished
-			break;
-		case 4:
-			//mortgage
-			break;
-		case 5:
-			p.displayProperty();
-			break;
-		case 6:
-			for (Player pl:players) {
-				pl.displayProperty();
-			}
-			break;
-		case 7:
-			
-			
 		}
 	}
 }

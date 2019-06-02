@@ -13,12 +13,17 @@ public class Tile {
 
 	private String type;
 
+	private boolean mortgaged;
+	
+	private int mortgagePeriod;
+
 	public Tile(String n, int p, String c, int i, Player o, String t) {
 		name = n;
 		price = p;
 		color = c;
 		index = i;
 		type = t;
+		mortgaged = false;
 
 	}
 
@@ -52,6 +57,17 @@ public class Tile {
 
 	public String getType() {
 		return type;
+	}
+
+	public void becomeMortgage() {
+		mortgaged = true;
+		mortgagePeriod=5;
+		
+	}
+
+	public void redeemed() {
+		mortgaged = false;
+		
 	}
 
 	@Override

@@ -9,6 +9,8 @@ public class Player {
 
 	private List<Tile> tiles;
 
+	private List<Tile> mortgages;
+
 	private String name;
 
 	private boolean employed;
@@ -20,6 +22,7 @@ public class Player {
 	public Player(String n) {
 		balance = 1500;
 		tiles = new ArrayList<Tile>();
+		mortgages = new ArrayList<Tile>();
 		employed = true;
 		position = 0;
 		name = n;
@@ -43,10 +46,11 @@ public class Player {
 		for (Tile t : tiles) {
 			System.out.print(count + ". ");
 			t.getName();
-			
+			count++;
+
 		}
 	}
-	
+
 	public Tile returnProperty(int i) {
 		return tiles.get(i);
 	}
@@ -76,9 +80,9 @@ public class Player {
 	public void getPay() {
 		this.setBalance(this.getBalance() + 200);
 	}
-	
+
 	public boolean afford(int price) {
-		return this.getBalance()>=price;
+		return this.getBalance() >= price;
 	}
 
 	public void buyTile(Tile t) {
@@ -91,29 +95,73 @@ public class Player {
 			if (t.equals(tiles.get(i))) {
 				t.changeOwner(null);
 				tiles.remove(i);
-				
+
 			}
 		}
 		balance += t.getPrice() * 0.6;
 	}
-	
+
 	public void buildRoom(Board arena) {
-		Scanner input=new Scanner(System.in);
+		Scanner input = new Scanner(System.in);
 		this.displayProperty();
 		System.out.println("Which one do you want to build more rooms in?");
 		int location, numberOfRooms;
 		location = input.nextInt();
-		System.out.println("How many new rooms? Each one costs $"+ arena.atIndex(location).getPrice()/5);
-		numberOfRooms=input.nextInt();
-		
-		if (!this.afford(arena.atIndex(location).getPrice()/5)) {
+		System.out.println("How many new rooms? Each one costs $" + arena.atIndex(location).getPrice() / 5);
+		numberOfRooms = input.nextInt();
+
+		if (!this.afford(arena.atIndex(location).getPrice() / 5)) {
 			System.out.println("^^^^^^^^^^^You can't afford this^^^^^^^^^^^^^");
-		}
-		else {
-			balance-= arena.atIndex(location).getPrice()/5*numberOfRooms;
+		} else {
+			balance -= arena.atIndex(location).getPrice() / 5 * numberOfRooms;
 			System.out.println("^^^^^^^^^^Purchase completed^^^^^^^^^^");
-			
+
 		}
+	}
+
+	public void getMortgage(Board arena) {
+		Scanner input = new Scanner(System.in);
+		this.displayProperty();
+		System.out.println("Which one do you want to mortgage? You got 75% of the amount you paid for the property.");
+		int location = input.nextInt();
+
+		balance += arena.atIndex(location).getPrice() * 0.75;
+		arena.atIndex(location).becomeMortgage();
+		mortgages.add(arena.atIndex(location));
+
+	}
+
+	public void redeemProperty(Board arena) {
+		Scanner input = new Scanner(System.in);
+		this.displayProperty();
+		System.out.println("Which one do you redeem? You pay the orginal price for it.");
+		int location = input.nextInt();
+
+		if (!this.afford(arena.atIndex(location).getPrice()))
+			System.out.println("You can't afford it");
+		else {
+			arena.atIndex(location).redeemed();
+			balance -= arena.atIndex(location).getPrice();
+			System.out.println("Property redeemed!");
+		}
+	}
+
+	public void trade(ArrayList<Player> players) {
+		Scanner input = new Scanner(System.in);
+		int count = 0;
+		for (Player p : players) {
+			System.out.print(count + ". ");
+			count++;
+			p.getName();
+		}
+
+		System.out.println("Who do you want to trade with?");
+		int choice = input.nextInt();
+
+	}
+
+	public boolean tradeRequest(Player p) {
+
 	}
 
 	public void payRent(Real_estate r) {
