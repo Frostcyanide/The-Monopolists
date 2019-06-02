@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.math.*;
 
 public class Real_estate extends Tile {
 
@@ -16,6 +17,11 @@ public class Real_estate extends Tile {
 
 	public int getRent() {
 		return this.rent;
+	}
+	
+	public void moreRoom(int n) {
+		numberOfHouse=n;
+		rent *=(int) Math.pow(1.5, numberOfHouse);
 	}
 
 }

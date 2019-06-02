@@ -34,6 +34,10 @@ public class Tile {
 		return this.owner;
 	}
 
+	public void getName() {
+		System.out.println(name);
+	}
+
 	public int getPrice() {
 		return this.price;
 	}
