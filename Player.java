@@ -90,6 +90,10 @@ public class Player {
 		balance -= t.getPrice();
 	}
 
+	public void getTile(Tile t) {
+		tiles.add(t);
+	}
+
 	public void sellTile(Tile t) {
 		for (int i = 0; i < tiles.size(); i++) {
 			if (t.equals(tiles.get(i))) {
@@ -99,6 +103,10 @@ public class Player {
 			}
 		}
 		balance += t.getPrice() * 0.6;
+	}
+
+	public void loseTile(Tile t) {
+		tiles.remove(t);
 	}
 
 	public void buildRoom(Board arena) {
@@ -173,14 +181,41 @@ public class Player {
 
 		System.out.println("How much do you demand?");
 		int demandPrice = input.nextInt();
-		
-		
+
+		if (!this.tradeRequest(players.get(choice1), tiles.get(location), priceOffer, tiles.get(demand), demandPrice))
+			System.out.println("Trade rejected by ");
+
+		else {
+			/*
+			 * Buyer loses the amount he offered Seller receives that
+			 */
+			players.get(choice1).setBalance(players.get(choice1).getBalance() + demandPrice);
+			balance -= priceOffer;
+			/*
+			 * Buyer gets the amount he demands Seller loses that
+			 */
+			balance += demandPrice;
+			players.get(choice1).setBalance(players.get(choice1).getBalance() - demandPrice);
+			/*
+			 * Seller gets the tile offered by buyer Buyer loses that tile
+			 */
+			players.get(choice1).getTile(tiles.get(location));
+			this.loseTile(tiles.get(location));
+			/*
+			 * Buyer gets the tile he demands Seller loses it
+			 */
+			this.getTile(players.get(choice1).returnProperty(demand));
+			players.get(choice1).loseTile(players.get(choice1).returnProperty(demand));
+
+		}
 
 	}
 
-	public boolean tradeRequest(Player p) {
+	public boolean tradeRequest(Player p, Tile tOffer, int mOffer, Tile tDemand, int mDemand) {
 		Scanner input = new Scanner(System.in);
-		System.out.println(" has sent you a trade request, accept or deny?(1/2)");
+		System.out.println("Player" + p.getName() + ", Player" + this.getName()
+				+ " has sent you a trade request, offering" + tOffer + " and $" + mOffer + " in exchange for " + tDemand
+				+ " and $" + mDemand + ", accept or deny?(1/2)");
 		return input.nextInt() == 1;
 
 	}
