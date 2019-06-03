@@ -86,19 +86,21 @@ public class Player {
 	}
 
 	public void buyTile(Tile t) {
-		tiles.add(t);
+
 		balance -= t.getPrice();
+		getTile(t);
+
 	}
 
 	public void getTile(Tile t) {
 		tiles.add(t);
+		t.changeOwner(this);
 	}
 
 	public void sellTile(Tile t) {
 		for (int i = 0; i < tiles.size(); i++) {
 			if (t.equals(tiles.get(i))) {
-				t.changeOwner(null);
-				tiles.remove(i);
+				loseTile(t);
 
 			}
 		}
@@ -107,6 +109,8 @@ public class Player {
 
 	public void loseTile(Tile t) {
 		tiles.remove(t);
+		t.changeOwner(null);
+
 	}
 
 	public void buildRoom(Board arena) {

@@ -33,7 +33,7 @@ public class StartGame {
 		JLabel label = new JLabel(icon);
 
 		window.setLayout(new FlowLayout());
-		window.setSize(849, 826);
+		window.setSize(1000, 1000);
 		window.add(label);
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,7 +49,7 @@ public class StartGame {
 
 					System.out.println("Now rolling dices:");
 					p.checkBeforeMove(p.roll());
-					numberOfPlayers--;
+					maxNumberOfRounds--;
 					System.out.println(arena.atIndex(p.getPosition())); // displaying the current tile information
 					System.out.println("You are " + p.getName());
 					System.out.println("Your balance: " + p.getBalance());
@@ -70,7 +70,7 @@ public class StartGame {
 					if (p.haveJob()) {
 						System.out.println("Now rolling dices:");
 						p.checkBeforeMove(p.roll());
-						numberOfPlayers--;
+						maxNumberOfRounds--;
 						System.out.println(arena.atIndex(p.getPosition())); // displaying the current tile information
 						System.out.println("You are " + p.getName());
 						System.out.println("Your balance: " + p.getBalance());
