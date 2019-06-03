@@ -156,11 +156,32 @@ public class Player {
 		}
 
 		System.out.println("Who do you want to trade with?");
-		int choice = input.nextInt();
+		int choice1 = input.nextInt();
+
+		displayProperty();
+		System.out.println(
+				"Which property do you offer?(Enter one property's number, or -1 if you don't offer a property)");
+		int location = input.nextInt();
+
+		System.out.println("How much are you offering?");
+		int priceOffer = input.nextInt();
+
+		players.get(choice1).displayProperty();
+		System.out.println("What property do you wish to get?");
+
+		int demand = input.nextInt();
+
+		System.out.println("How much do you demand?");
+		int demandPrice = input.nextInt();
+		
+		
 
 	}
 
 	public boolean tradeRequest(Player p) {
+		Scanner input = new Scanner(System.in);
+		System.out.println(" has sent you a trade request, accept or deny?(1/2)");
+		return input.nextInt() == 1;
 
 	}
 
