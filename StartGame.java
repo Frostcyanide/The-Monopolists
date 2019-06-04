@@ -44,42 +44,42 @@ public class StartGame {
 
 			for (Player p : players) {
 				if (p.haveJob()) {
-					System.out.println(
-							"\n*****************It is now Player " + p.getName() + "'s turn*********************");
+					System.out.println("\n*****************It is now  " + p.getName() + "'s turn*********************");
 
 					System.out.println("Now rolling dices:");
 					p.checkBeforeMove(p.roll());
 					maxNumberOfRounds--;
-					System.out.println(arena.atIndex(p.getPosition())); // displaying the current tile information
-					System.out.println("You are " + p.getName());
+					arena.atIndex(p.getPosition()).display();
+					// displaying the current tile information
+
 					System.out.println("Your balance: " + p.getBalance());
 					System.out.println();
 
 					CheckTile(arena, p);
 
-					System.out.println(arena.atIndex(p.getPosition())); // displaying the current tile information
-					System.out.println("Your balance: " + p.getBalance());
+					System.out.println("You are at "); // displaying the current tile information
+					arena.atIndex(p.getPosition()).display();
+					System.out.println("Your balance at the end of round: " + p.getBalance());
 					System.out.println();
 
 					menu(p, arena, players);
 
 				} else {
-					System.out.println("It is now Player " + p.getName() + "'s turn");
+					System.out.println("***************It is now  " + p.getName() + "'s turn*****************");
 					p.findJob();
 
 					if (p.haveJob()) {
 						System.out.println("Now rolling dices:");
 						p.checkBeforeMove(p.roll());
 						maxNumberOfRounds--;
-						System.out.println(arena.atIndex(p.getPosition())); // displaying the current tile information
-						System.out.println("You are " + p.getName());
+						arena.atIndex(p.getPosition()).display(); // displaying the current tile information
 						System.out.println("Your balance: " + p.getBalance());
 						System.out.println();
 
 						CheckTile(arena, p);
 
-						System.out.println(arena.atIndex(p.getPosition())); // displaying the current tile information
-						System.out.println("Your balance: " + p.getBalance());
+						arena.atIndex(p.getPosition()).display(); // displaying the current tile information
+						System.out.println("Your balance at the end of round: " + p.getBalance());
 						System.out.println();
 						menu(p, arena, players);
 

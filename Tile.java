@@ -14,7 +14,7 @@ public class Tile {
 	private String type;
 
 	private boolean mortgaged;
-	
+
 	private int mortgagePeriod;
 
 	public Tile(String n, int p, String c, int i, Player o, String t) {
@@ -28,11 +28,11 @@ public class Tile {
 	}
 
 	public void display() {
-		this.toString();
+		System.out.println(this.toString());
 	}
 
 	public void changeOwner(Player p) {
-		this.owner = p;
+		owner = p;
 	}
 
 	public Player getOwner() {
@@ -61,20 +61,22 @@ public class Tile {
 
 	public void becomeMortgage() {
 		mortgaged = true;
-		mortgagePeriod=5;
-		
+		mortgagePeriod = 5;
+
 	}
 
 	public void redeemed() {
 		mortgaged = false;
-		
+
 	}
 
 	@Override
 	public String toString() {
 
-		return "Tile name:" + this.name + "\n" + "Tile price:" + this.price + "\n" + "This tile is own by:" + this.owner
-				+ "(null means owned by bank so far)";
+		if (owner == null)
+			return "Tile name:" + name + "\n" + "Tile price:" + price + "\n" + "This tile is own by:" 
+					+ " bank ";
+		return "Tile name:" + name + "\n" + "Tile price:" + price + "\n" + "This tile is own by:" + owner.getName();
 	}
 
 }

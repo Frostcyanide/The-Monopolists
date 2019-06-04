@@ -30,7 +30,7 @@ public class Player {
 	}
 
 	public String getName() {
-		return "Player" + this.name;
+		return "Player " + this.name;
 	}
 
 	public int getBalance() {
@@ -47,6 +47,7 @@ public class Player {
 			System.out.print(count + ". ");
 			t.getName();
 			count++;
+			System.out.println();
 
 		}
 	}
