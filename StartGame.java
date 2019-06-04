@@ -169,6 +169,7 @@ public class StartGame {
 		case "Fate":
 			// fate card
 			// ((Fate) current).generateFate(p, arena);
+			((Fate) arena.atIndex(p.getPosition())).generateFate(p, arena, players);
 			break;
 		case "Tile":
 			// special tile
