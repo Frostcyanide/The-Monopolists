@@ -21,11 +21,65 @@ public class Fate extends Tile {
 		}
 	}
 
-	public void generateFate() {
+	public void generateFate(Player p, Board arena, ArrayList<Player> players) {
+		Scanner input = new Scanner(System.in);
 		Random gen = new Random();
 		int r = gen.nextInt(10);
-		String c = deck.get(r);
-		System.out.println(c);
+		System.out.println(deck.get(r));
+		switch (r) {
+		case 0: 
+			p.setBalance(p.getBalance() - 100);
+			System.out.println("Your new balance: " + p.getBalance());
+			break;
+			
+		case 1:
+			p.setBalance(p.getBalance() - 50);
+			System.out.println("Your new balance: " + p.getBalance());
+			break;
+			
+		case 2:
+			p.setBalance(p.getBalance() - 75);
+			System.out.println("Your new balance: " + p.getBalance());
+			break;
+			
+		case 3:
+			p.setBalance(p.getBalance() - 50);
+			System.out.println("Your new balance: " + p.getBalance());
+			break;
+			
+		case 4:
+			p.setBalance(p.getBalance() - 150);
+			System.out.println("Your new balance: " + p.getBalance());
+			break;
+			
+		case 5:
+			p.setBalance(p.getBalance() + 100);
+			System.out.println("Your new balance: " + p.getBalance());
+			break;
+
+		case 6:
+			p.setBalance(p.getBalance() + 50);
+			System.out.println("Your new balance: " + p.getBalance());
+			break;
+			
+		case 7: 
+			p.setBalance(p.getBalance() + 25);
+			System.out.println("Your new balance: " + p.getBalance());
+			break;
+
+		case 8:
+			p.setBalance(p.getBalance() - 50);
+			System.out.println("Your new balance: " + p.getBalance());
+			break;
+			
+		case 9:
+			p.setBalance(p.getBalance() + 50);
+			System.out.println("Your new balance: " + p.getBalance());
+			break;
+		}
+		
+		
 	}
+	
 
 }
