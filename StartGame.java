@@ -168,7 +168,6 @@ public class StartGame {
 			break;
 		case "Fate":
 			// fate card
-			// ((Fate) current).generateFate(p, arena);
 			((Fate) arena.atIndex(p.getPosition())).generateFate(p, arena, players);
 			break;
 		case "Tile":
@@ -198,9 +197,11 @@ public class StartGame {
 			switch (playerChoice) {
 			case 1:
 				if (arena.atIndex(p.getPosition()).getOwner() != null)
-					System.out.println("This tile is already purchased by" + arena.atIndex(p.getPosition()).getOwner());
+					System.out.println(
+							"This tile is already purchased by" + arena.atIndex(p.getPosition()).getOwner().getName());
 				else {
 					p.buyTile(arena.atIndex(p.getPosition()));
+					System.out.println("New balance " + p.getBalance());
 					System.out.println("Purchase complete!");
 				}
 				break;

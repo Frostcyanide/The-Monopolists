@@ -74,29 +74,30 @@ public class Board {
 		int highestPrice = 0;
 		Player highestPlayer = null;
 
+		System.out.println("The tile is owned by bank");
+
 		while (players.size() != 1) {
 
-			for (Player p : players) {
-				System.out.println("The current highest price is $" + highestPrice + " by " + "highestPlayer\n"
-						+ p.getName() + ", would you like to bid or fold?(1/2)");
+			for (int i = 0; i < players.size(); i++) {
+				System.out.println("The current highest price is $" + highestPrice + "\n" + players.get(i).getName()
+						+ ", would you like to bid or fold?(1/2)");
 				if (input.nextInt() == 2)
-					players.remove(p);
+					players.remove(players.get(i));
 				else {
 					System.out.println("How much would you bid?");
 					int price = input.nextInt();
 					if (price > highestPrice) {
 						highestPrice = price;
-						highestPlayer = p;
+						highestPlayer = players.get(i);
 					}
 				}
 			}
-
-			System.out.println(players.get(0).getName() + "won the auction at a price of " + highestPrice
-					+ " and got the tile\n" + t.toString());
-
-			players.get(0).buyTile(t);
-			players.get(0).setBalance(players.get(0).getBalance() + t.getPrice() - highestPrice);
-
 		}
+		System.out.println(players.get(0).getName() + "won the auction at a price of " + highestPrice
+				+ " and got the tile\n" + t.toString());
+
+		players.get(0).buyTile(t);
+		players.get(0).setBalance(players.get(0).getBalance() + t.getPrice() - highestPrice);
+
 	}
 }
