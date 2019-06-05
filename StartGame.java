@@ -13,7 +13,7 @@ public class StartGame {
 	public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 		JFrame window = new JFrame();
 		ImageIcon cover = new ImageIcon("Cover.jpg");
-		ImageIcon icon = new ImageIcon("FinalBoard.png");
+		ImageIcon icon = new ImageIcon("FinalBoard.jpg");
 		JLabel label1 = new JLabel(cover);
 		JLabel label2 = new JLabel(icon);
 
@@ -52,7 +52,7 @@ public class StartGame {
 		window.requestFocus();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		int maxNumberOfRounds = 20;
+		int maxNumberOfRounds = 100;
 
 		while (maxNumberOfRounds >= 0) {
 
@@ -80,6 +80,7 @@ public class StartGame {
 					System.out.println();
 
 					CheckTile(arena, p);
+
 					if (p.bankrupt()) {
 						if (p.getLiquidated()) {
 							players.remove(p);
@@ -268,7 +269,8 @@ public class StartGame {
 				System.out.println("New balance: " + p.getBalance());
 				break;
 			case 3:
-				// trade with others, unfinished
+				p.trade(players);
+
 				break;
 			case 4:
 
@@ -294,6 +296,10 @@ public class StartGame {
 			case 8:
 
 				break;
+
+			case 9:
+				System.out.println("Because of your carelessness, you are fired");
+				p.loseJob();
 
 			}
 		}
