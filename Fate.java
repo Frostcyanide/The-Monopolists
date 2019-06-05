@@ -69,11 +69,10 @@ public class Fate extends Tile {
 
 		case 8:
 			p.loseJob();
-
 			break;
 
 		case 9:
-			p.setBalance(p.getBalance() + 50);
+			p.setBalance(p.getBalance() - 30);
 			System.out.println("Your new balance: " + p.getBalance());
 			p.loseJob();
 			break;
