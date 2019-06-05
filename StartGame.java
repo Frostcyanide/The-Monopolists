@@ -2,13 +2,29 @@ import java.awt.FlowLayout;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.*;
 
 public class StartGame {
 
 	public static ArrayList<Player> players = new ArrayList<Player>();
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException, InterruptedException {
+		JFrame window = new JFrame();
+		ImageIcon cover = new ImageIcon("Cover.jpg");
+		ImageIcon icon = new ImageIcon("FinalBoard.png");
+		JLabel label1 = new JLabel(cover);
+		JLabel label2 = new JLabel(icon);
+
+		window.setLayout(new FlowLayout());
+		window.setTitle("The Monopolists");
+
+		window.setSize(860, 900);
+
+		window.add(label1);
+		window.setLocation(200, 200);
+		window.setVisible(true);
 
 		Board arena = new Board();
 		int numberOfPlayers = 0;
@@ -28,14 +44,12 @@ public class StartGame {
 		 * Initialize a window
 		 */
 
-		JFrame window = new JFrame();
-		ImageIcon icon = new ImageIcon("FinalBoard.jpg");
-		JLabel label = new JLabel(icon);
-
-		window.setLayout(new FlowLayout());
-		window.setSize(1000, 1000);
-		window.add(label);
+		window.setVisible(false);
+		window.remove(label1);
+		window.add(label2);
 		window.setVisible(true);
+
+		window.requestFocus();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		int maxNumberOfRounds = 20;
@@ -44,42 +58,76 @@ public class StartGame {
 
 			for (Player p : players) {
 				if (p.haveJob()) {
+					window.requestFocus();
 					System.out.println("\n*****************It is now  " + p.getName() + "'s turn*********************");
 
-					System.out.println("Now rolling dices:");
+					System.out.println("\n\nNow rolling dices:");
+
+					System.out.println("3...");
+					TimeUnit.SECONDS.sleep(1);
+					System.out.println("2...");
+					TimeUnit.SECONDS.sleep(1);
+					System.out.println("1...");
+					TimeUnit.SECONDS.sleep(1);
+
 					p.checkBeforeMove(p.roll());
 					maxNumberOfRounds--;
+					System.out.println();
 					arena.atIndex(p.getPosition()).display();
 					// displaying the current tile information
 
-					System.out.println("Your balance: " + p.getBalance());
+					System.out.println("\n\nYour balance: " + p.getBalance());
 					System.out.println();
 
 					CheckTile(arena, p);
+					if (p.bankrupt()) {
+						if (p.getLiquidated()) {
+							players.remove(p);
+							continue;
+						}
+					}
 
-					System.out.println("You are at "); // displaying the current tile information
+					System.out.println("\n\nAt the end of your round, you are at: "); // displaying the current tile
+																						// information
 					arena.atIndex(p.getPosition()).display();
-					System.out.println("Your balance at the end of round: " + p.getBalance());
+					System.out.println("\n\nYour balance at the end of round: " + p.getBalance());
 					System.out.println();
 
 					menu(p, arena, players);
 
 				} else {
+					window.requestFocus();
 					System.out.println("***************It is now  " + p.getName() + "'s turn*****************");
 					p.findJob();
 
 					if (p.haveJob()) {
-						System.out.println("Now rolling dices:");
+						System.out.println("\n\nNow rolling dices:");
+
+						System.out.println("3...");
+						TimeUnit.SECONDS.sleep(1);
+						System.out.println("2...");
+						TimeUnit.SECONDS.sleep(1);
+						System.out.println("1...");
+						TimeUnit.SECONDS.sleep(1);
+
 						p.checkBeforeMove(p.roll());
 						maxNumberOfRounds--;
 						arena.atIndex(p.getPosition()).display(); // displaying the current tile information
-						System.out.println("Your balance: " + p.getBalance());
+						System.out.println("\n\nYour balance: " + p.getBalance());
 						System.out.println();
 
 						CheckTile(arena, p);
 
+						if (p.bankrupt()) {
+							if (p.getLiquidated()) {
+								players.remove(p);
+								continue;
+							}
+						}
+
+						System.out.println("\n\nAt the end of your round, you are at: ");
 						arena.atIndex(p.getPosition()).display(); // displaying the current tile information
-						System.out.println("Your balance at the end of round: " + p.getBalance());
+						System.out.println("\n\nYour balance at the end of round: " + p.getBalance());
 						System.out.println();
 						menu(p, arena, players);
 
@@ -90,6 +138,9 @@ public class StartGame {
 			}
 
 		}
+
+		victory();
+
 	}
 
 	public static void CheckTile(Board arena, Player p) {
@@ -199,7 +250,9 @@ public class StartGame {
 				if (arena.atIndex(p.getPosition()).getOwner() != null)
 					System.out.println(
 							"This tile is already purchased by" + arena.atIndex(p.getPosition()).getOwner().getName());
-				else {
+				else if (arena.atIndex(p.getPosition()).getColor() == "no color") {
+					System.out.println("You can not buy this tile");
+				} else {
 					p.buyTile(arena.atIndex(p.getPosition()));
 					System.out.println("New balance " + p.getBalance());
 					System.out.println("Purchase complete!");
@@ -244,5 +297,23 @@ public class StartGame {
 
 			}
 		}
+	}
+
+	public static void victory() {
+		System.out.println("******************Game ends!*********************" + "Now counting who is the winner:");
+		int highestValue = 0;
+		Player winner = null;
+
+		for (Player p : players) {
+			int value = p.totalValue();
+
+			if (highestValue < value) {
+				highestValue = value;
+				winner = p;
+			}
+		}
+
+		System.out.println("The winner is" + winner.getName());
+
 	}
 }

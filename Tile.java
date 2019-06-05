@@ -74,9 +74,10 @@ public class Tile {
 	public String toString() {
 
 		if (owner == null)
-			return "Tile name:" + name + "\n" + "Tile price:" + price + "\n" + "This tile is own by:" 
-					+ " bank ";
-		return "Tile name:" + name + "\n" + "Tile price:" + price + "\n" + "This tile is own by:" + owner.getName();
+			return "Tile name:" + name + "\n" + "Tile color:" + color + "\n" + "Tile price:" + price + "\n"
+					+ "This tile is own by:" + " bank ";
+		return "Tile name:" + name + "\n" + "Tile color:" + color + "\n" + "Tile price:" + price + "\n"
+				+ "This tile is own by:" + owner.getName();
 	}
 
 }

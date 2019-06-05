@@ -13,7 +13,7 @@ public class Fate extends Tile {
 			throws FileNotFoundException {
 
 		super(name, price, color, index, owner, type);
-		File file1 = new File("Chance.txt");
+		File file1 = new File("Fate.txt");
 		Scanner reader1 = new Scanner(file1);
 
 		while (reader1.hasNextLine()) {
@@ -27,31 +27,31 @@ public class Fate extends Tile {
 		int r = gen.nextInt(10);
 		System.out.println(deck.get(r));
 		switch (r) {
-		case 0: 
+		case 0:
 			p.setBalance(p.getBalance() - 100);
 			System.out.println("Your new balance: " + p.getBalance());
 			break;
-			
+
 		case 1:
 			p.setBalance(p.getBalance() - 50);
 			System.out.println("Your new balance: " + p.getBalance());
 			break;
-			
+
 		case 2:
 			p.setBalance(p.getBalance() - 75);
 			System.out.println("Your new balance: " + p.getBalance());
 			break;
-			
+
 		case 3:
 			p.setBalance(p.getBalance() - 50);
 			System.out.println("Your new balance: " + p.getBalance());
 			break;
-			
+
 		case 4:
 			p.setBalance(p.getBalance() - 150);
 			System.out.println("Your new balance: " + p.getBalance());
 			break;
-			
+
 		case 5:
 			p.setBalance(p.getBalance() + 100);
 			System.out.println("Your new balance: " + p.getBalance());
@@ -61,25 +61,24 @@ public class Fate extends Tile {
 			p.setBalance(p.getBalance() + 50);
 			System.out.println("Your new balance: " + p.getBalance());
 			break;
-			
-		case 7: 
+
+		case 7:
 			p.setBalance(p.getBalance() + 25);
 			System.out.println("Your new balance: " + p.getBalance());
 			break;
 
 		case 8:
-			p.setBalance(p.getBalance() - 50);
-			System.out.println("Your new balance: " + p.getBalance());
+			p.loseJob();
+
 			break;
-			
+
 		case 9:
 			p.setBalance(p.getBalance() + 50);
 			System.out.println("Your new balance: " + p.getBalance());
+			p.loseJob();
 			break;
 		}
-		
-		
+
 	}
-	
 
 }

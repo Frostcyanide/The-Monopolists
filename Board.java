@@ -49,19 +49,19 @@ public class Board {
 			board[typeB[i]] = new Bond(reader3.nextLine(), reader7.nextInt(), "white", typeB[i], null, "B");
 		}
 		for (int i = 0; i < typeC.length; i++) {
-			board[typeC[i]] = new Chance("Chance", 0, "chance", typeC[i], null, "C");
+			board[typeC[i]] = new Chance("Chance", 0, "no color", typeC[i], null, "C");
 		}
 		for (int i = 0; i < typeF.length; i++) {
-			board[typeF[i]] = new Fate("Fate", 0, "fate", typeF[i], null, "F");
+			board[typeF[i]] = new Fate("Fate", 0, "no color", typeF[i], null, "F");
 
 		}
 
-		board[4] = new Tile("Luxury tax", -150, "grey", 4, null, "T");
-		board[38] = new Tile("Automobile tax", -250, "grey", 38, null, "T");
-		board[0] = new Tile("Payday, collect $200", 200, "NC", 0, null, "T");
-		board[10] = new Tile("Helping the unemployed", -100, "NC", 10, null, "T");
-		board[20] = new Tile("Vacation", 0, "NC", 20, null, "T");
-		board[30] = new Tile("Got fired!", 0, "NC", 30, null, "T");
+		board[4] = new Tile("Luxury tax", -150, "no color", 4, null, "T");
+		board[38] = new Tile("Automobile tax", -250, "no color", 38, null, "T");
+		board[0] = new Tile("Payday, collect $200", 200, "no color", 0, null, "T");
+		board[10] = new Tile("Helping the unemployed", -100, "no color", 10, null, "T");
+		board[20] = new Tile("Vacation", 0, "no color", 20, null, "T");
+		board[30] = new Tile("Got fired!", 0, "no color", 30, null, "T");
 
 	}
 
@@ -73,31 +73,35 @@ public class Board {
 		Scanner input = new Scanner(System.in);
 		int highestPrice = 0;
 		Player highestPlayer = null;
+		ArrayList<Player> competitors = new ArrayList<Player>(players);
 
 		System.out.println("The tile is owned by bank");
+		int trace = 0;
 
-		while (players.size() != 1) {
+		while (competitors.size() != 1) {
 
-			for (int i = 0; i < players.size(); i++) {
-				System.out.println("The current highest price is $" + highestPrice + "\n" + players.get(i).getName()
-						+ ", would you like to bid or fold?(1/2)");
+			while (trace < competitors.size()) {
+				System.out.println("The current highest price is $" + highestPrice + "\n"
+						+ competitors.get(trace).getName() + ", would you like to bid or fold?(1/2)");
 				if (input.nextInt() == 2)
-					players.remove(players.get(i));
+					competitors.remove(trace);
 				else {
 					System.out.println("How much would you bid?");
 					int price = input.nextInt();
 					if (price > highestPrice) {
 						highestPrice = price;
-						highestPlayer = players.get(i);
+						highestPlayer = competitors.get(trace);
 					}
+					trace++;
 				}
 			}
+			trace = 0;
 		}
-		System.out.println(players.get(0).getName() + "won the auction at a price of " + highestPrice
+		System.out.println(competitors.get(0).getName() + "won the auction at a price of " + highestPrice
 				+ " and got the tile\n" + t.toString());
 
-		players.get(0).buyTile(t);
-		players.get(0).setBalance(players.get(0).getBalance() + t.getPrice() - highestPrice);
+		competitors.get(0).buyTile(t);
+		competitors.get(0).setBalance(competitors.get(0).getBalance() + t.getPrice() - highestPrice);
 
 	}
 }

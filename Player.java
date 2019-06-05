@@ -275,4 +275,47 @@ public class Player {
 		}
 	}
 
+	public int totalValue() {
+
+		System.out.println(this.getName() + "has the following properties:");
+		System.out.println("Cash:" + Integer.toString(balance));
+		displayProperty();
+
+		int total = balance;
+		for (Tile t : tiles) {
+			total += t.getPrice();
+		}
+		return total;
+	}
+
+	public boolean bankrupt() {
+		return balance < 0;
+	}
+
+	public boolean getLiquidated() {
+		System.out.println(
+				"You are in bankrupcy now! The only way to stay in the game is to sell all your properties until you have enough cash");
+		while (tiles.size() > 0) {
+			System.out.println("The following tiles has been liquidated:");
+			tiles.get(tiles.size() - 1).display();
+			this.sellTile(tiles.get(tiles.size() - 1));
+
+		}
+
+		System.out.println("All mortgages will be taken away as well");
+
+		for (Tile t : mortgages) {
+			t.changeOwner(null);
+		}
+
+		if (balance < 0) {
+			System.out.println(
+					"Your properties still can not afford your debts, unfortunately you lose and will be removed from the game");
+			return false;
+		}
+
+		return true;
+
+	}
+
 }
