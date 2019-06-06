@@ -88,6 +88,9 @@ public class Board {
 				else {
 					System.out.println("How much would you bid?");
 					int price = input.nextInt();
+					if (price < highestPrice)
+						System.out.println("\nUse your brain my man! You broke the game, congrats");
+
 					if (price > highestPrice) {
 						highestPrice = price;
 						highestPlayer = competitors.get(trace);

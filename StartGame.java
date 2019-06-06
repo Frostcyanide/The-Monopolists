@@ -21,9 +21,10 @@ public class StartGame {
 		window.setTitle("The Monopolists");
 
 		window.setSize(860, 900);
+		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		window.setUndecorated(true);
 
 		window.add(label1);
-		window.setLocation(200, 200);
 		window.setVisible(true);
 
 		Board arena = new Board();
@@ -226,7 +227,7 @@ public class StartGame {
 			// special tile
 			p.setBalance(p.getBalance() + arena.atIndex(p.getPosition()).getPrice());
 			// go to jail
-			if (p.getPosition() == 29) {
+			if (p.getPosition() == 30) {
 				p.loseJob();
 			}
 			break;

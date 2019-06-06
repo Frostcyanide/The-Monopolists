@@ -64,14 +64,16 @@ public class Player {
 	}
 
 	public void moveTo(int index) {
-		position = index;
+		this.position = index;
 	}
 
 	public void checkBeforeMove(int step) {
 		System.out.println(step);
-		if (this.getPosition() + step > 39)
+		if (this.getPosition() + step > 39) {
 			this.moveTo(getPosition() + step - 40);
-		else
+			getPay();
+			System.out.println("You just passed payday!");
+		} else
 			position += step;
 	}
 
@@ -258,7 +260,7 @@ public class Player {
 	public void loseJob() {
 		employed = false;
 		remainRoundUnemployed = 3;
-		this.moveTo(9);
+		this.moveTo(10);
 	}
 
 	public void findJob() throws InterruptedException {
