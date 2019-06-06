@@ -21,8 +21,6 @@ public class StartGame {
 		window.setTitle("The Monopolists");
 
 		window.setSize(860, 900);
-		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		window.setUndecorated(true);
 
 		window.add(label1);
 		window.setVisible(true);
@@ -76,7 +74,7 @@ public class StartGame {
 					System.out.println();
 					arena.atIndex(p.getPosition()).display();
 					// displaying the current tile information
-
+					TimeUnit.SECONDS.sleep(1);
 					System.out.println("\n\nYour balance: " + p.getBalance());
 					System.out.println();
 
@@ -91,7 +89,9 @@ public class StartGame {
 
 					System.out.println("\n\nAt the end of your round, you are at: "); // displaying the current tile
 																						// information
+					TimeUnit.SECONDS.sleep(1);
 					arena.atIndex(p.getPosition()).display();
+					TimeUnit.SECONDS.sleep(1);
 					System.out.println("\n\nYour balance at the end of round: " + p.getBalance());
 					System.out.println();
 
@@ -115,6 +115,7 @@ public class StartGame {
 						p.checkBeforeMove(p.roll());
 						maxNumberOfRounds--;
 						arena.atIndex(p.getPosition()).display(); // displaying the current tile information
+						TimeUnit.SECONDS.sleep(1);
 						System.out.println("\n\nYour balance: " + p.getBalance());
 						System.out.println();
 
@@ -128,7 +129,9 @@ public class StartGame {
 						}
 
 						System.out.println("\n\nAt the end of your round, you are at: ");
+						TimeUnit.SECONDS.sleep(1);
 						arena.atIndex(p.getPosition()).display(); // displaying the current tile information
+						TimeUnit.SECONDS.sleep(1);
 						System.out.println("\n\nYour balance at the end of round: " + p.getBalance());
 						System.out.println();
 						menu(p, arena, players);
@@ -229,7 +232,9 @@ public class StartGame {
 			// go to jail
 			if (p.getPosition() == 30) {
 				p.loseJob();
+				p.setBalance(p.getBalance() + 100);
 			}
+
 			break;
 		}
 	}
@@ -237,7 +242,7 @@ public class StartGame {
 	/*
 	 * Player makes choice of what they will do in their round
 	 */
-	public static void menu(Player p, Board arena, ArrayList<Player> players) {
+	public static void menu(Player p, Board arena, ArrayList<Player> players) throws InterruptedException {
 		Scanner input = new Scanner(System.in);
 		int playerChoice = 0;
 
@@ -250,14 +255,16 @@ public class StartGame {
 			switch (playerChoice) {
 			case 1:
 				if (arena.atIndex(p.getPosition()).getOwner() != null)
+					
 					System.out.println(
 							"This tile is already purchased by" + arena.atIndex(p.getPosition()).getOwner().getName());
 				else if (arena.atIndex(p.getPosition()).getColor() == "no color") {
 					System.out.println("You can not buy this tile");
 				} else {
 					p.buyTile(arena.atIndex(p.getPosition()));
+						System.out.println("Purchase complete!");
 					System.out.println("New balance " + p.getBalance());
-					System.out.println("Purchase complete!");
+				
 				}
 				break;
 			case 2:
@@ -267,6 +274,7 @@ public class StartGame {
 				int choice = input.nextInt();
 				p.sellTile(p.returnProperty(choice));
 				System.out.println("Action complete!");
+				TimeUnit.SECONDS.sleep(1);
 				System.out.println("New balance: " + p.getBalance());
 				break;
 			case 3:

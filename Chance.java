@@ -75,10 +75,10 @@ public class Chance extends Tile {
 			System.out.println("You are at "); // displaying the current tile information
 			arena.atIndex(p.getPosition()).display();
 			input = new Scanner(System.in);
-			if (arena.atIndex(39).getOwner() == null) {
+			if (arena.atIndex(8).getOwner() == null) {
 				System.out.println("Buy or auction it?(1/2)");
 				if (input.nextInt() == 1) {
-					p.buyTile(arena.atIndex(39));
+					p.buyTile(arena.atIndex(8));
 				} else {
 					arena.hostAuction(players, arena.atIndex(8));
 				}

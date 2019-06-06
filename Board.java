@@ -59,7 +59,7 @@ public class Board {
 		board[4] = new Tile("Luxury tax", -150, "no color", 4, null, "T");
 		board[38] = new Tile("Automobile tax", -250, "no color", 38, null, "T");
 		board[0] = new Tile("Payday, collect $200", 200, "no color", 0, null, "T");
-		board[10] = new Tile("Helping the unemployed", -100, "no color", 10, null, "T");
+		board[10] = new Tile("Unemployment!", 0, "no color", 10, null, "T");
 		board[20] = new Tile("Vacation", 0, "no color", 20, null, "T");
 		board[30] = new Tile("Got fired!", 0, "no color", 30, null, "T");
 

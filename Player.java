@@ -42,10 +42,11 @@ public class Player {
 		this.balance = b;
 	}
 
-	public void displayProperty() {
+	public void displayProperty() throws InterruptedException {
 		int count = 0;
-		System.out.print(getName() + "'s properties are listed here");
+		System.out.print(getName() + "'s properties are listed here\n");
 		for (Tile t : tiles) {
+			TimeUnit.SECONDS.sleep(1);
 			System.out.print(count + ". ");
 			t.getName();
 			count++;
@@ -118,13 +119,13 @@ public class Player {
 
 	}
 
-	public void buildRoom(Board arena) {
+	public void buildRoom(Board arena) throws InterruptedException {
 		Scanner input = new Scanner(System.in);
 		this.displayProperty();
 		System.out.println("Which one do you want to build more rooms in?");
 		int location, numberOfRooms;
 		location = input.nextInt();
-		System.out.println("How many new rooms? Each one costs $" + arena.atIndex(location).getPrice() / 5);
+		System.out.println("How many new rooms? Each one costs $" + tiles.get(location).getPrice() / 5);
 		numberOfRooms = input.nextInt();
 
 		if (!this.afford(arena.atIndex(location).getPrice() / 5)) {
@@ -136,7 +137,7 @@ public class Player {
 		}
 	}
 
-	public void getMortgage(Board arena) {
+	public void getMortgage(Board arena) throws InterruptedException {
 		Scanner input = new Scanner(System.in);
 		this.displayProperty();
 		System.out.println("Which one do you want to mortgage? You got 75% of the amount you paid for the property.");
@@ -148,7 +149,7 @@ public class Player {
 
 	}
 
-	public void redeemProperty(Board arena) {
+	public void redeemProperty(Board arena) throws InterruptedException {
 		Scanner input = new Scanner(System.in);
 		this.displayProperty();
 		System.out.println("Which one do you redeem? You pay the orginal price for it.");
@@ -163,7 +164,7 @@ public class Player {
 		}
 	}
 
-	public void trade(ArrayList<Player> players) {
+	public void trade(ArrayList<Player> players) throws InterruptedException {
 		Scanner input = new Scanner(System.in);
 		int count = 0;
 		for (Player p : players) {
@@ -222,6 +223,7 @@ public class Player {
 			this.getTile(players.get(choice1).returnProperty(demand));
 			players.get(choice1).loseTile(players.get(choice1).returnProperty(demand));
 
+			System.out.println("Deal is accpeted!");
 		}
 
 	}
@@ -229,14 +231,22 @@ public class Player {
 	public boolean tradeRequest(Player p, int tOffer, int mOffer, int tDemand, int mDemand) {
 		Scanner input = new Scanner(System.in);
 
-		Tile t1 = returnProperty(tOffer);
-		Tile t2 = p.returnProperty(tDemand);
+		Tile t1 = null;
+		Tile t2 = null;
 
-		if (tOffer == -1)
-			t1 = null;
-		else if (tDemand == -1)
-			t2 = null;
+		if (tOffer == -1 || tDemand == -1) {
+			if (tOffer == -1)
+				t1 = null;
 
+			if (tDemand == -1)
+				t2 = null;
+		}
+
+		else {
+			t1 = returnProperty(tOffer);
+			t2 = p.returnProperty(tDemand);
+
+		}
 		System.out.println(p.getName() + ", " + this.getName() + " has sent you a trade request, offering\n" + t1
 				+ "\n\n and $" + mOffer + " in exchange for \n" + t2 + "\n\n and $" + mDemand
 				+ "\n\n, accept or reject?(1/2)");
@@ -305,7 +315,7 @@ public class Player {
 		}
 	}
 
-	public int totalValue() {
+	public int totalValue() throws InterruptedException {
 
 		System.out.println(this.getName() + "has the following properties:");
 		System.out.println("Cash:" + Integer.toString(balance));
@@ -322,7 +332,7 @@ public class Player {
 		return balance < 0;
 	}
 
-	public boolean getLiquidated() {
+	public boolean getLiquidated() throws InterruptedException {
 		System.out.println(
 				"You are in bankrupcy now! The only way to stay in the game is to sell all your properties until you have enough cash");
 		while (tiles.size() > 0) {
@@ -331,7 +341,7 @@ public class Player {
 			this.sellTile(tiles.get(tiles.size() - 1));
 
 		}
-
+		TimeUnit.SECONDS.sleep(1);
 		System.out.println("All mortgages will be taken away as well");
 
 		for (Tile t : mortgages) {
