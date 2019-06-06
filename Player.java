@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Player {
 
@@ -165,7 +166,9 @@ public class Player {
 		for (Player p : players) {
 			System.out.print(count + ". ");
 			count++;
-			p.getName();
+			System.out.print(p.getName());
+			System.out.println();
+
 		}
 
 		System.out.println("Who do you want to trade with?");
@@ -187,7 +190,8 @@ public class Player {
 		System.out.println("How much do you demand?");
 		int demandPrice = input.nextInt();
 
-		if (!this.tradeRequest(players.get(choice1), tiles.get(location), priceOffer, tiles.get(demand), demandPrice))
+		if (!this.tradeRequest(players.get(choice1), tiles.get(location), priceOffer,
+				players.get(choice1).returnProperty(demand), demandPrice))
 			System.out.println("Trade rejected by ");
 
 		else {
@@ -216,11 +220,12 @@ public class Player {
 
 	}
 
+//displaying problem
 	public boolean tradeRequest(Player p, Tile tOffer, int mOffer, Tile tDemand, int mDemand) {
 		Scanner input = new Scanner(System.in);
-		System.out.println("Player" + p.getName() + ", Player" + this.getName()
-				+ " has sent you a trade request, offering" + tOffer + " and $" + mOffer + " in exchange for " + tDemand
-				+ " and $" + mDemand + ", accept or deny?(1/2)");
+		System.out.println(p.getName() + ", " + this.getName() + " has sent you a trade request, offering\n" + tOffer
+				+ "\n\n and $" + mOffer + " in exchange for \n" + tDemand + "\n\n and $" + mDemand
+				+ "\n\n, accept or deny?(1/2)");
 		return input.nextInt() == 1;
 
 	}
@@ -253,11 +258,22 @@ public class Player {
 	public void loseJob() {
 		employed = false;
 		remainRoundUnemployed = 3;
-		position = 9;
+		this.moveTo(9);
 	}
 
-	public void findJob() {
+	public void findJob() throws InterruptedException {
 		int r = roll();
+		System.out.println("Looking for jobs......(Get a job only when you hit 3, 6, 9, or 12)");
+		TimeUnit.SECONDS.sleep(1);
+		System.out.println("Trying out for the Patriots...");
+		TimeUnit.SECONDS.sleep(1);
+		System.out.println("Running for presidents...");
+		TimeUnit.SECONDS.sleep(1);
+		System.out.println("Trying to be a Youtuber...");
+		TimeUnit.SECONDS.sleep(1);
+
+		System.out.println(r);
+
 		if (r == 3 || r == 6 || r == 9 || r == 12) {
 			employed = true;
 			remainRoundUnemployed = 0;

@@ -21,7 +21,7 @@ public class Real_estate extends Tile {
 	
 	public void moreRoom(int n) {
 		numberOfHouse=n;
-		rent *=(int) Math.pow(1.5, numberOfHouse);
+		rent *=(int) Math.pow(1.2, numberOfHouse);
 	}
 
 }

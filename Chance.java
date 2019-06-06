@@ -56,7 +56,7 @@ public class Chance extends Tile {
 				if (input.nextInt() == 1) {
 					p.buyTile(arena.atIndex(39));
 				} else {
-					// auction
+					arena.hostAuction(players, arena.atIndex(39));
 				}
 			}
 
