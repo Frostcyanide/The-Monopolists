@@ -44,6 +44,7 @@ public class Player {
 
 	public void displayProperty() {
 		int count = 0;
+		System.out.print(getName() + "'s properties are listed here");
 		for (Tile t : tiles) {
 			System.out.print(count + ". ");
 			t.getName();
@@ -185,16 +186,19 @@ public class Player {
 		int priceOffer = input.nextInt();
 
 		players.get(choice1).displayProperty();
-		System.out.println("What property do you wish to get?");
+		System.out.println(
+				"What property do you wish to get?(Enter one property's number, or -1 if you don't offer a property)\"");
 
 		int demand = input.nextInt();
 
+		/*
+		 * when you don't want to trade any properties
+		 */
 		System.out.println("How much do you demand?");
 		int demandPrice = input.nextInt();
 
-		if (!this.tradeRequest(players.get(choice1), tiles.get(location), priceOffer,
-				players.get(choice1).returnProperty(demand), demandPrice))
-			System.out.println("Trade rejected by ");
+		if (!this.tradeRequest(players.get(choice1), location, priceOffer, demand, demandPrice))
+			System.out.println("Trade rejected");
 
 		else {
 			/*
@@ -222,12 +226,20 @@ public class Player {
 
 	}
 
-//displaying problem
-	public boolean tradeRequest(Player p, Tile tOffer, int mOffer, Tile tDemand, int mDemand) {
+	public boolean tradeRequest(Player p, int tOffer, int mOffer, int tDemand, int mDemand) {
 		Scanner input = new Scanner(System.in);
-		System.out.println(p.getName() + ", " + this.getName() + " has sent you a trade request, offering\n" + tOffer
-				+ "\n\n and $" + mOffer + " in exchange for \n" + tDemand + "\n\n and $" + mDemand
-				+ "\n\n, accept or deny?(1/2)");
+
+		Tile t1 = returnProperty(tOffer);
+		Tile t2 = p.returnProperty(tDemand);
+
+		if (tOffer == -1)
+			t1 = null;
+		else if (tDemand == -1)
+			t2 = null;
+
+		System.out.println(p.getName() + ", " + this.getName() + " has sent you a trade request, offering\n" + t1
+				+ "\n\n and $" + mOffer + " in exchange for \n" + t2 + "\n\n and $" + mDemand
+				+ "\n\n, accept or reject?(1/2)");
 		return input.nextInt() == 1;
 
 	}
