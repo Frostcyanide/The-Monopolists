@@ -55,6 +55,19 @@ public class Player {
 		}
 	}
 
+	public void displayMortgage() throws InterruptedException {
+		int count = 0;
+		System.out.print(getName() + "'s mortgages are listed here\n");
+		for (Tile t : mortgages) {
+			TimeUnit.SECONDS.sleep(1);
+			System.out.print(count + ". ");
+			t.getName();
+			count++;
+			System.out.println();
+
+		}
+	}
+
 	public Tile returnProperty(int i) {
 		return tiles.get(i);
 	}
@@ -85,6 +98,9 @@ public class Player {
 
 	public void getPay() {
 		this.setBalance(this.getBalance() + 200);
+		System.out.print("New balance: ");
+		System.out.println(getBalance());
+
 	}
 
 	public boolean afford(int price) {
@@ -95,6 +111,9 @@ public class Player {
 
 		balance -= t.getPrice();
 		getTile(t);
+
+		System.out.print("New balance: ");
+		System.out.println(getBalance());
 
 	}
 
@@ -128,11 +147,13 @@ public class Player {
 		System.out.println("How many new rooms? Each one costs $" + tiles.get(location).getPrice() / 5);
 		numberOfRooms = input.nextInt();
 
-		if (!this.afford(arena.atIndex(location).getPrice() / 5)) {
+		if (!this.afford(tiles.get(location).getPrice() / 5)) {
 			System.out.println("^^^^^^^^^^^You can't afford this^^^^^^^^^^^^^");
 		} else {
-			balance -= arena.atIndex(location).getPrice() / 5 * numberOfRooms;
+			balance -= tiles.get(location).getPrice() / 5 * numberOfRooms;
 			System.out.println("^^^^^^^^^^Purchase completed^^^^^^^^^^");
+			System.out.print("New balance: ");
+			System.out.println(getBalance());
 
 		}
 	}
@@ -144,24 +165,30 @@ public class Player {
 		int location = input.nextInt();
 
 		balance += arena.atIndex(location).getPrice() * 0.75;
-		arena.atIndex(location).becomeMortgage();
-		mortgages.add(arena.atIndex(location));
+		tiles.remove(location);
+		mortgages.add(tiles.get(location));
+		System.out.print("New balance: ");
+		System.out.println(getBalance());
 
 	}
 
 	public void redeemProperty(Board arena) throws InterruptedException {
 		Scanner input = new Scanner(System.in);
-		this.displayProperty();
+		this.displayMortgage();
 		System.out.println("Which one do you redeem? You pay the orginal price for it.");
 		int location = input.nextInt();
 
 		if (!this.afford(arena.atIndex(location).getPrice()))
 			System.out.println("You can't afford it");
 		else {
-			arena.atIndex(location).redeemed();
+			tiles.add(mortgages.get(location));
+			mortgages.remove(location);
 			balance -= arena.atIndex(location).getPrice();
 			System.out.println("Property redeemed!");
+			System.out.print("New balance: ");
+			System.out.println(getBalance());
 		}
+
 	}
 
 	public void trade(ArrayList<Player> players) throws InterruptedException {
@@ -205,6 +232,7 @@ public class Player {
 			/*
 			 * Buyer loses the amount he offered Seller receives that
 			 */
+
 			players.get(choice1).setBalance(players.get(choice1).getBalance() + demandPrice);
 			balance -= priceOffer;
 			/*
@@ -215,15 +243,21 @@ public class Player {
 			/*
 			 * Seller gets the tile offered by buyer Buyer loses that tile
 			 */
-			players.get(choice1).getTile(tiles.get(location));
-			this.loseTile(tiles.get(location));
+			if (location != -1) {
+				players.get(choice1).getTile(tiles.get(location));
+				this.loseTile(tiles.get(location));
+			}
 			/*
 			 * Buyer gets the tile he demands Seller loses it
 			 */
-			this.getTile(players.get(choice1).returnProperty(demand));
-			players.get(choice1).loseTile(players.get(choice1).returnProperty(demand));
+			if (demand != -1) {
+				this.getTile(players.get(choice1).returnProperty(demand));
+				players.get(choice1).loseTile(players.get(choice1).returnProperty(demand));
+			}
 
 			System.out.println("Deal is accpeted!");
+			System.out.print("New balance: ");
+			System.out.println(getBalance());
 		}
 
 	}
@@ -234,19 +268,12 @@ public class Player {
 		Tile t1 = null;
 		Tile t2 = null;
 
-		if (tOffer == -1 || tDemand == -1) {
-			if (tOffer == -1)
-				t1 = null;
-
-			if (tDemand == -1)
-				t2 = null;
-		}
-
-		else {
+		if (tOffer != -1)
 			t1 = returnProperty(tOffer);
-			t2 = p.returnProperty(tDemand);
 
-		}
+		if (tDemand != -1)
+			t2 = returnProperty(tDemand);
+
 		System.out.println(p.getName() + ", " + this.getName() + " has sent you a trade request, offering\n" + t1
 				+ "\n\n and $" + mOffer + " in exchange for \n" + t2 + "\n\n and $" + mDemand
 				+ "\n\n, accept or reject?(1/2)");
@@ -256,10 +283,13 @@ public class Player {
 
 	public void payRent(Real_estate r) {
 		balance -= r.getRent();
+		System.out.print("New balance: ");
+		System.out.println(getBalance());
 	}
 
 	public void receiveRent(Real_estate r) {
 		balance += r.getRent();
+
 	}
 
 	public void returnInvestment(Stock s) {
@@ -269,10 +299,14 @@ public class Player {
 		else
 			balance -= gen.nextInt(4) * s.getPrice();
 
+		System.out.print("New balance: ");
+		System.out.println(getBalance());
 	}
 
 	public void returnBond(Bond b) {
 		balance += b.getPrice() * 2;
+		System.out.print("New balance: ");
+		System.out.println(getBalance());
 	}
 
 	public boolean haveJob() {
@@ -354,6 +388,8 @@ public class Player {
 			return false;
 		}
 
+		System.out.print("New balance: ");
+		System.out.println(getBalance());
 		return true;
 
 	}

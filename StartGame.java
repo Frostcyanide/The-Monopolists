@@ -255,16 +255,16 @@ public class StartGame {
 			switch (playerChoice) {
 			case 1:
 				if (arena.atIndex(p.getPosition()).getOwner() != null)
-					
+
 					System.out.println(
 							"This tile is already purchased by" + arena.atIndex(p.getPosition()).getOwner().getName());
 				else if (arena.atIndex(p.getPosition()).getColor() == "no color") {
 					System.out.println("You can not buy this tile");
 				} else {
 					p.buyTile(arena.atIndex(p.getPosition()));
-						System.out.println("Purchase complete!");
+					System.out.println("Purchase complete!");
 					System.out.println("New balance " + p.getBalance());
-				
+
 				}
 				break;
 			case 2:
@@ -314,7 +314,7 @@ public class StartGame {
 		}
 	}
 
-	public static void victory() {
+	public static void victory() throws InterruptedException {
 		System.out.println("******************Game ends!*********************" + "Now counting who is the winner:");
 		int highestValue = 0;
 		Player winner = null;
