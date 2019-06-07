@@ -164,9 +164,10 @@ public class Player {
 		System.out.println("Which one do you want to mortgage? You got 75% of the amount you paid for the property.");
 		int location = input.nextInt();
 
-		balance += arena.atIndex(location).getPrice() * 0.75;
-		tiles.remove(location);
+		balance += tiles.get(location).getPrice() * 0.75;
 		mortgages.add(tiles.get(location));
+		tiles.remove(location);
+
 		System.out.print("New balance: ");
 		System.out.println(getBalance());
 
@@ -183,7 +184,7 @@ public class Player {
 		else {
 			tiles.add(mortgages.get(location));
 			mortgages.remove(location);
-			balance -= arena.atIndex(location).getPrice();
+			balance -= tiles.get(location).getPrice();
 			System.out.println("Property redeemed!");
 			System.out.print("New balance: ");
 			System.out.println(getBalance());
@@ -382,9 +383,13 @@ public class Player {
 			t.changeOwner(null);
 		}
 
-		if (balance < 0) {
+		mortgages.removeAll(mortgages);
+
+		if (bankrupt()) {
 			System.out.println(
-					"Your properties still can not afford your debts, unfortunately you lose and will be removed from the game");
+					"Your properties still can not afford your debts! The bank will give you some money to help you out off of the plight");
+			balance += -balance + 300;
+
 			return false;
 		}
 

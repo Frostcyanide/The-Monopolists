@@ -81,10 +81,8 @@ public class StartGame {
 					CheckTile(arena, p);
 
 					if (p.bankrupt()) {
-						if (p.getLiquidated()) {
-							players.remove(p);
-							continue;
-						}
+						p.getLiquidated();
+
 					}
 
 					System.out.println("\n\nAt the end of your round, you are at: "); // displaying the current tile
@@ -126,16 +124,17 @@ public class StartGame {
 								players.remove(p);
 								continue;
 							}
+						} else {
+
+							System.out.println("\n\nAt the end of your round, you are at: ");
+							TimeUnit.SECONDS.sleep(1);
+							arena.atIndex(p.getPosition()).display(); // displaying the current tile information
+							TimeUnit.SECONDS.sleep(1);
+							System.out.println("\n\nYour balance at the end of round: " + p.getBalance());
+							System.out.println();
+							menu(p, arena, players);
+
 						}
-
-						System.out.println("\n\nAt the end of your round, you are at: ");
-						TimeUnit.SECONDS.sleep(1);
-						arena.atIndex(p.getPosition()).display(); // displaying the current tile information
-						TimeUnit.SECONDS.sleep(1);
-						System.out.println("\n\nYour balance at the end of round: " + p.getBalance());
-						System.out.println();
-						menu(p, arena, players);
-
 					}
 
 				}
