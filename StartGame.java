@@ -12,7 +12,7 @@ public class StartGame {
 
 	public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 		JFrame window = new JFrame();
-		ImageIcon cover = new ImageIcon("Cover.jpg");
+		ImageIcon cover = new ImageIcon("Cover.png");
 		ImageIcon icon = new ImageIcon("FinalBoard.jpg");
 		JLabel label1 = new JLabel(cover);
 		JLabel label2 = new JLabel(icon);
